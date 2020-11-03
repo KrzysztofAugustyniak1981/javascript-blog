@@ -13,7 +13,7 @@ function titleClickHandler(event){
   }
   /* Done add class 'active' to the clicked link */
 
-  clickedElement.classList.add('active')
+  clickedElement.classList.add('active');
   console.log('clickedElement:', clickedElement);
 
   /* Done remove class 'active' from all articles */
@@ -43,37 +43,38 @@ function generateTitleLinks(){
 
   /* remove contents of titleList */
   const titleList = document.querySelector(optTitleListSelector);
-  titleList.innerHTML = "";
+  titleList.innerHTML = '';
   
   const articles = document.querySelectorAll(optArticleSelector);
   let html = '';
   
   /* for each article */
-    for(let article of articles){
+  for(let article of articles){
       
-      /* get the article id */
-      const articleId = article.getAttribute('id');
+    /* get the article id */
+    const articleId = article.getAttribute('id');
     
-      /* find the title element and get the title from the title element */
-      const articleTitle = article.querySelector(optTitleSelector).innerHTML;
+    /* find the title element and get the title from the title element */
+    const articleTitle = article.querySelector(optTitleSelector).innerHTML;
 
-      /* create HTML of the link */
-      const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-      console.log(linkHTML)
+    /* create HTML of the link */
+    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+    console.log(linkHTML);
 
-      /* insert link into html variable */
-      html = html + linkHTML;
-      console.log(html)
-    }
+    /* insert link into html variable */
+    html = html + linkHTML;
+    console.log(html);
+  }
     
   titleList.innerHTML = html;
-}
-
-generateTitleLinks();
-
-const links = document.querySelectorAll('.titles a');
+  
+  const links = document.querySelectorAll('.titles a');
 console.log(links);
 
 for(let link of links){
   link.addEventListener('click', titleClickHandler);
 }
+}
+
+generateTitleLinks();
+
