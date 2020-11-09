@@ -48,7 +48,7 @@ function generateTitleLinks(customSelector = ''){
   
   const articles = document.querySelectorAll(optArticleSelector + customSelector);
   let html = '';
-  console.log(customSelector);
+
   
   /* for each article */
   for(let article of articles){
@@ -116,7 +116,6 @@ function generateTags(){
     const articleTagsArray = articleTags.split(' ');
     /* START LOOP: for each tag */
     for (let tag of articleTagsArray){
-      
       /* generate HTML of the link */
       const linkHTML = '<li><a href="#tag-' + articleTags + '"><span>' + articleTags + '</span></a></li>';
       /* add generated code to html variable */
@@ -144,10 +143,8 @@ function generateTags(){
   /* [NEW] START LOOP: for each tag in all Tags: */
   for(let tag in allTags) {
     /* [NEW] generate code of a link and add it to allTagsHTML */
-    allTagsHTML += tag + ' (' + allTags[tag] + ') ';
-    const tagLinkHTML = '<li class="' + calculateTagClass(allTags[tag], tagsParams) + '"></li>';
-    console.log('taglinkHTML:', tagLinkHTML);
-    console.log('allTagsHTML:', allTagsHTML);
+    const tagLinkHTML = '<li class=" ' + calculateTagClass(allTags[tag], tagsParams) + '"><a href="#tag-' + tag + '">' + tag + '</a></li>';
+    allTagsHTML += tagLinkHTML
     /* [NEW] END LOOP: for each tag in allTags: */
   }
   /* [NEW] add html from allTags to tagList */
@@ -199,6 +196,30 @@ function addClickListenersToTags(){
 }
 
 addClickListenersToTags();
+
+function calculateAuthorsParams(authors) {
+  const paramsa = {
+    max: 0,
+    min: 999999,
+  }
+  for(let author in authors){
+    if (authors[author] > paramsa.max){
+      paramsa.max = authors[author];
+    }
+    if (authors[author] < paramsa.max){
+      paramsa.min = authors[author];
+    }
+  }
+  return paramsa;
+}
+function calculateAuthorClass(count, paramsa){
+  const normalizedCount = count - params.min;
+  const normalizedMax = params.max - params.min;
+  const percentage = normalizedCount / normalizedMax;
+  const classNumber = Math.floor( percentage * (optCloudClassCount - 1) + 1 );
+  
+  return optCloudClassPrefix + classNumber;
+}
 
 function generateAuthors(){
   /* find all articles */
