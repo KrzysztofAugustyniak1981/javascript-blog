@@ -102,10 +102,13 @@ body {
 .post-tags {
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-align: center;
+      align-items: center;
 }
 
-.post-tags p {
+.post-tags a {
   margin: 0 10px 0 0;
+  display: block;
 }
 
 .tag-size-1 {
